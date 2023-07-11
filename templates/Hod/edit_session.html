@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="content container-fluid">
+   <div class="page-header">
+      <div class="row align-items-center">
+         <div class="col">
+            <h3 class="page-title">Edit Session</h3>
+            <ul class="breadcrumb">
+               <li class="breadcrumb-item"><a href="subjects.html">Session</a></li>
+               <li class="breadcrumb-item active">Edit Session</li>
+            </ul>
+         </div>
+      </div>
+   </div>
+   {% include 'includes/messages.html' %}
+   <div class="row">
+      <div class="col-sm-12">
+         <div class="card">
+            <div class="card-body">
+               <form action="{% url 'update_session' %}" method="POST">
+                  {% csrf_token %}
+                  <div class="row">
+                     <div class="col-12">
+                        <h5 class="form-title"><span>Session Information</span></h5>
+                     </div>
+                     <input type="hidden" name="session_id" value="{{ session.id }}">
+                     <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                           <label>Session Start</label>
+                           <input type="date" class="form-control" name="session_start" value="{{ session.session_start }}" required>
+                        </div>
+                     </div>
+                      <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                           <label>Session End</label>
+                           <input type="date" class="form-control" name="session_end" value="{{ session.session_end }}" required>
+                        </div>
+                     </div>
+                     <br>
+                     <div class="col-12 mt-2">
+                        <button type="submit" class="btn btn-primary">Update</button>
+                     </div>
+                  </div>
+               </form>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+{% endblock %}

@@ -1,0 +1,166 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="content container-fluid">
+   <div class="page-header">
+      <div class="row align-items-center">
+         <div class="col">
+            <h3 class="page-title">Staff Send Notification</h3>
+            <ul class="breadcrumb">
+               <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+               <li class="breadcrumb-item active">Staff Send Notification</li>
+            </ul>
+         </div>
+         <div class="col-auto text-right float-right ml-auto">
+            {% include 'includes/messages.html' %}
+         </div>
+      </div>
+   </div>
+   <div class="row">
+      <div class="col-sm-12">
+         <div class="card card-table">
+            <div class="card-body">
+               <div class="table-responsive">
+                  <table id="table_id" class="table table-hover table-center mb-0">
+                     <thead>
+                        <tr>
+                           <th>ID</th>
+                           <th>Name</th>
+                           <th>Email</th>
+                           <th class="text-right">Action</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        {% for i in staff %}
+                        <tr>
+                           <td>{{ i.admin.id }}</td>
+                           <td>
+                              <h2 class="table-avatar">
+                                 <a href="student-details.html" class="avatar avatar-sm mr-2">
+                                    <img class="avatar-img rounded-circle" src="/{{ i.admin.profile_pic }}" alt="User Image">
+                                 </a>
+                                 <a href="student-details.html">{{ i.admin.first_name }}&nbsp;{{ i.admin.last_name }}</a>
+                              </h2>
+                           </td>
+                           <td>{{ i.admin.email }}</td>
+                           <td class="text-right">
+                              <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal{{ i.admin.id }}">Send Notification</button>
+                           </td>
+                           <td class="text-right">
+                              <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal2{{ i.admin.id }}">View All Notifications</button>
+                           </td>
+                        </tr>
+                        {% endfor %}
+                     </tbody>
+                  </table>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   {% for i in staff %}
+   <!-- The Modal -->
+   <div class="modal" id="myModal{{ i.admin.id }}">
+      <div class="modal-dialog">
+         <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+               <h4 class="modal-title">Send Notification</h4>
+               <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <form action="{% url 'staff_save_notification' %}" method="post">
+               {% csrf_token %}
+               <div class="modal-body">
+                  <input type="text" class="form-control" name="message" placeholder="Enter your message">
+                  <input type="text" class="form-control" name="staff_id" value="{{ i.admin.id }}" hidden>
+               </div>
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-success">Submit</button>
+               </div>
+            </form>
+         </div>
+      </div>
+   </div>
+   {% endfor %}
+
+   <!-- The Modal -->
+   {% for i in staff %}
+   <div class="modal" id="myModal2{{ i.admin.id }}">
+      <div class="modal-dialog">
+         <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+               <h4 class="modal-title">See Notifications for {{ i.admin.first_name }} {{ i.admin.last_name }}</h4>
+               <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+               <table id="table" class="table table-hover table-center mb-0">
+                  <thead>
+                     <tr>
+                        <th>Message</th>
+                        <th class="text-right">Status</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     {% for notification in see_notification %}
+                     <tr>
+                        <td>{{ notification.message }}</td>
+                        {% if notification.status == 0 %}
+                        <td><span class="badge badge-info">Delivered</span></td>
+                        {% else %}
+                        <td><span class="badge badge-success">Seen</span></td>
+                        {% endif %}
+                     </tr>
+                     {% endfor %}
+                  </tbody>
+               </table>
+            </div>
+         </div>
+      </div>
+   </div>
+   {% endfor %}
+
+   <!-- View All Notifications Modal -->
+   <div class="modal" id="viewAllNotificationsModal">
+      <div class="modal-dialog">
+         <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+               <h4 class="modal-title">View All Notifications</h4>
+               <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+               {% for i in staff %}
+               <h5>{{ i.admin.first_name }} {{ i.admin.last_name }}</h5>
+               <table class="table table-hover table-center mb-0">
+                  <thead>
+                     <tr>
+                        <th>Message</th>
+                        <th class="text-right">Status</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     {% for notification in see_notification %}
+                     {% if notification.admin == i.admin %}
+                     <tr>
+                        <td>{{ notification.message }}</td>
+                        {% if notification.status == 0 %}
+                        <td><span class="badge badge-info">Delivered</span></td>
+                        {% else %}
+                        <td><span class="badge badge-success">Seen</span></td>
+                        {% endif %}
+                     </tr>
+                     {% endif %}
+                     {% endfor %}
+                  </tbody>
+               </table>
+               {% endfor %}
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- End of View All Notifications Modal -->
+</div>
+
+{% endblock %}

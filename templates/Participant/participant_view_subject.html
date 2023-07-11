@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<div class="content container-fluid">
+   <div class="page-header">
+      <div class="row align-items-center">
+         <div class="col">
+            <h3 class="page-title">Subjects</h3>
+            <ul class="breadcrumb">
+               <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+               <li class="breadcrumb-item active">View</li>
+               <li class="breadcrumb-item active">Subjects</li>
+            </ul>
+         </div>
+      </div>
+   </div>
+   {% include 'includes/messages.html' %}
+   <div class="row">
+      <div class="col-sm-12">
+         <div class="card card-table">
+            <div class="card-body">
+               <div class="table-responsive">
+                  <table id="table_id" class="table table-hover table-center mb-0">
+                     <thead>
+                        <tr>
+                           <th>Name</th>
+                           <th>Department</th>
+                           <th>Staff</th>
+                           <th>PDF File</th>
+
+                        </tr>
+                     </thead>
+                     <tbody>
+                        {% for i in subjects %}
+                        <tr>
+                           <td>{{i.name}}</td>
+                           <td>{{i.department}}</td>
+                           <td>{{i.staff.admin.first_name}} {{i.staff.admin.last_name}}</td>
+                           <td>
+   {% if i.pdf_file %}
+   <a href="{{ i.pdf_file.url }}" class="btn btn-primary" download>Download</a>
+   {% else %}
+   No PDF available
+   {% endif %}
+</td>
+                        </tr>
+                        {% endfor %}
+                     </tbody>
+                  </table>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+{% endblock %}

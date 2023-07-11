@@ -1,0 +1,167 @@
+<script>
+$(document).ready(function() {
+
+    if ($('#staff_gender').length > 0) {
+        var options = {
+            chart: {
+                height: 350,
+                type: "pie", // Changed chart type to pie
+                toolbar: {
+                    show: false
+                },
+            },
+            labels: ['Females', 'Males'], // Added labels for the pie slices
+            series: [{{staff_female}}, {{staff_male}}], // Updated series data with actual values
+            colors: ['#FF4560', '#FFBC53'], // Set colors for the pie slices
+        };
+
+        var chart = new ApexCharts(
+            document.querySelector("#staff_gender"),
+            options
+        );
+        chart.render();
+    }
+
+    // Bar chart
+
+    if ($('#participant_gender').length > 0) {
+        var optionsBar = {
+            chart: {
+                type: 'bar',
+                height: 350,
+                width: '100%',
+                stacked: true,
+                toolbar: {
+                    show: false
+                },
+            },
+            dataLabels: {
+                enabled: false
+            },
+            plotOptions: {
+                bar: {
+                    columnWidth: '45%',
+                }
+            },
+            series: [{
+                name: "Male",
+                color: '#fdbb38',
+                data: [{{participant_male}}],
+            }, {
+                name: "Female",
+                color: '#19affb',
+                data: [{{participant_female}}],
+            }],
+            labels: [2023],
+            xaxis: {
+                labels: {
+                    show: false
+                },
+                axisBorder: {
+                    show: false
+                },
+                axisTicks: {
+                    show: false
+                },
+            },
+            yaxis: {
+                axisBorder: {
+                    show: false
+                },
+                axisTicks: {
+                    show: false
+                },
+                labels: {
+                    style: {
+                        colors: '#777'
+                    }
+                }
+            },
+            title: {
+                text: '',
+                align: 'left',
+                style: {
+                    fontSize: '18px'
+                }
+            }
+
+        }
+
+        var chartBar = new ApexCharts(document.querySelector('#participant_gender'), optionsBar);
+        chartBar.render();
+    }
+
+    // Donut chart for all members (participants and staff) and departments and subjects
+
+    if ($('#all_members').length > 0) {
+        var optionsDonut = {
+            chart: {
+                height: 350,
+                type: "donut",
+                toolbar: {
+                    show: false
+                },
+            },
+            series: [{{participant_count}}, {{staff_count}}, {{department_count}}, {{subject_count}}],
+            labels: ['Participants', 'Staff', 'Departments', 'Subjects'],
+            colors: ['#FF4560', '#8b83d0', '#19affb', '#fdbb38'],
+        };
+
+        var chartDonut = new ApexCharts(
+            document.querySelector("#all_members"),
+            optionsDonut
+        );
+        chartDonut.render();
+    }
+
+     // Donut chart for all members (participants and staff) and departments and subjects
+
+   // Donut chart for all members (participants and staff) and departments and subjects
+
+if ($('#number_of_people').length > 0) {
+
+    var options = {
+        labels: ['Participants', 'Staff'],
+        series: [{{participant_count}}, {{staff_count}}],
+        chart: {
+            width: '100%', // Set the width to 100%
+            type: 'donut',
+        },
+        plotOptions: {
+            pie: {
+                startAngle: -90,
+                endAngle: 270
+            }
+        },
+        dataLabels: {
+            enabled: false
+        },
+        fill: {
+            type: 'gradient',
+        },
+        legend: {
+            formatter: function(val, opts) {
+                return val + " - " + opts.w.globals.series[opts.seriesIndex]
+            }
+        },
+        responsive: [{
+            breakpoint: 480,
+            options: {
+                chart: {
+                    width: 200
+                },
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }]
+    };
+
+    var chart = new ApexCharts(document.querySelector("#number_of_people"), options);
+    chart.render();
+}
+
+
+
+});
+</script>

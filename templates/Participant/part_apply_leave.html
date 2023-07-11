@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="content container-fluid">
+   <div class="page-header">
+      <div class="row align-items-center">
+         <div class="col">
+            <h3 class="page-title">Apply For Leave</h3>
+            <ul class="breadcrumb">
+               <li class="breadcrumb-item"><a href="subjects.html">Dashboard</a></li>
+               <li class="breadcrumb-item active">Apply For Leave</li>
+            </ul>
+         </div>
+      </div>
+   </div>
+   {% include 'includes/messages.html' %}
+   <div class="row">
+      <div class="col-sm-12">
+         <div class="card">
+            <div class="card-body">
+               <form action="{% url 'part_apply_leave_save' %}" method="POST" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  <div class="row">
+                     <div class="col-12">
+                        <h5 class="form-title"><span>Apply For Leave</span></h5>
+                     </div>
+                     <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                           <label>Leave Date</label>
+                           <input type="date" class="form-control" name="leave_date" required>
+                        </div>
+                     </div>
+                     <div class="col-12">
+                        <div class="form-group">
+                           <label>Leave Message</label>
+                           <textarea class="form-control" name="leave_message" required></textarea>
+                        </div>
+                     </div>
+                     <div class="col-12 mt-2">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                     </div>
+                  </div>
+               </form>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+{% endblock %}
