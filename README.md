@@ -14,39 +14,6 @@ This Django project is a conference management system that allows users to manag
 ## Installation
 
 1. Clone the repository:
-  git clone https://github.com/hassan-abidar/Conference_management.git
-
-2. Install the required dependencies:
-
-3. Set up the database:
-- Configure the database settings in the project's `settings.py` file.
-- Migrate the database:
-  ```
-  python manage.py migrate
-  ```
-
-4. Run the development server:
-
-Sure! Here's an example of a GitHub README for your Django project:
-
-markdown
-Copy code
-# Django Conference Management System
-
-This Django project is a conference management system that allows users to manage participants, departments, staff, sessions, and attendance for a conference.
-
-## Features
-
-- Admin panel for managing various aspects of the conference
-- User authentication and login functionality
-- CRUD operations for managing participants, departments, staff, sessions, and subjects
-- Notification system for sending notifications to staff and participants
-- Attendance tracking for staff and participants
-- Leave management for staff and participants
-
-## Installation
-
-1. Clone the repository:
 git clone https://github.com/your-username/django-conference-management.git
 
 markdown
