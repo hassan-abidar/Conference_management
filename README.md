@@ -14,7 +14,7 @@ This Django project is a conference management system that allows users to manag
 ## Installation
 
 1. Clone the repository:
-git clone https://github.com/your-username/django-conference-management.git
+git clone https://github.com/hassan-abidar/Conference_management.git
 
 markdown
 Copy code
