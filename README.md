@@ -56,3 +56,16 @@ Contributions are welcome! If you would like to contribute to this project, plea
 ## License
 
 This project is licensed under the @hassan-abidar.
+
+LOGIN : 
+![image](https://github.com/hassan-abidar/Conference_management/assets/71274391/e214c2e6-e03f-4c10-8f5b-e4c627aad10c)
+HOME : 
+![image](https://github.com/hassan-abidar/Conference_management/assets/71274391/7a252d45-0848-4f29-a7de-978c3eab5611)
+STAFF HOME : 
+![image](https://github.com/hassan-abidar/Conference_management/assets/71274391/56b60f29-6beb-4327-91fb-bafbf0b0e42a)
+PARTICIPANT HOME : 
+![image](https://github.com/hassan-abidar/Conference_management/assets/71274391/92435aa1-d660-47e9-8776-093a19fb173d)
+
+
+
+
